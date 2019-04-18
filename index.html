@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8" /> 
+<head>   
+
+           <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.0/dist/leaflet.css" /> 
+		   <script src="https://unpkg.com/leaflet@1.0.0/dist/leaflet.js"></script> 
+           <link rel="stylesheet" href="css/styledLayerControl.css" />
+		   <link rel="stylesheet" href="css/styledLayerControl.css" />
+           <script src="src/styledLayerControl.js"></script>
+		   
+		   
+		  
+					 
+		   <script src="leaflet-search-master\src\leaflet-search.js"></script> 
+                   <link rel="stylesheet" href="leaflet-search-master\src\leaflet-search.css" />
+		   <script type="text/javascript" src=""></script>
+		   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+ <style>   
+        body {
+            padding: 0;
+            margin: 0;
+        }
+        html, body, #map {
+        height: 100%;
+        width: 100vw;
+        }
+	 
+ </style>    
+ 
+ </head>
+  <body>    
+  
+    
+	 
+	
+	
+	
+	
+	
+   <div id="map"></div>
+
+   
+   <script>    
+   
+   var map = L.map('map', {  
+                    center: [44.353393,  11.714592],
+                    zoom: 16
+                    
+                });
+   
+   
+   
+	
+	var Esri_WorldImagery = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+	attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+}).addTo(map);
+	   
+    
+  	   
+	   
+	   
+ 
+    
+	var lyrlaser;  
+	
+	lyrlaser = L.imageOverlay('mapaleonardo.png', [[44.364784, 11.694219],[ 44.341904, 11.734202]]).addTo(map);
+
+
+    	 
+ /*
+    var	aaa = L.geoJson(aaa, {
+				  style: style4,
+                  onEachFeature: popup3
+              }).addTo(map);
+			  
+			  
+    var	Bapisterio = L.geoJson(Bapisterio, {
+				  style: style4,
+                  onEachFeature: popup3
+              }).addTo(map); 
+ 
+ 
+    var Prebisterio = L.geoJson(Prebisterio, {
+				  style: style4,
+                  onEachFeature: popup3
+              }).addTo(map); 
+ 
+    var Sacristia = L.geoJson(Sacristia, {
+				  style: style4,
+                  onEachFeature: popup3
+              }).addTo(map);
+    
+	
+    
+	var sala = L.geoJson(sala, {
+				  style: style4,
+                  onEachFeature: popup3
+              }).addTo(map);
+			  
+	var socotoro = L.geoJson(socotoro, {
+				  style: style4,
+                  onEachFeature: popup3
+              }).addTo(map);	
+			  
+		  
+
+		  
+   
+    var Elevaciones = L.geoJSON(Elevaciones, {
+	style: style4,
+    onEachFeature: function (feature, layer) {
+    layer.bindPopup('<h2>'+feature.properties.Nombre+'</h2><p>Materiales: '+feature.properties.Materiales+'</p>');
+  }
+  }).addTo(map);
+  
+  
+  var muro = L.geoJSON(muro, {
+  style: style4,
+    onEachFeature: function (feature, layer) {
+    layer.bindPopup('<h2>'+feature.properties.Elevación+'</h2><p>Materiales: '+feature.properties.Material+'</p>');
+  }
+  }).addTo(map);
+	   
+	var torre = L.geoJSON(torre, {
+	style: style4,
+    onEachFeature: function (feature, layer) {
+    layer.bindPopup('<h2>'+feature.properties.Nombre+'</h2><p>Materiales: '+feature.properties.Material+'</p>');
+  }
+  }).addTo(map);   
+	 
+	   
+	   
+	   
+       /* var searchControl = new L.Control.Search({ 
+               layer: poblados,  
+               propertyName: 'NOMBRE',
+	       zoom: 12,
+	       textPlaceholder: "Buscar Poblados"
+               });
+	 
+	var searchControl2 = new L.Control.Search({ 
+               layer: azapa,  
+               propertyName: 'PROPIETARI',
+	       zoom: 9,
+	       textPlaceholder: "Buscar Propietarios Azapa"
+               }); 
+	 
+	 map.addControl(searchControl); 
+	 map.addControl(searchControl2); */ 
+		 
+		 var baseMaps = [
+					 {
+						groupName : "Mapas Base",
+						layers    : {
+							
+							"Mapa Base" :Esri_WorldImagery
+                            					
+                            						
+						}
+					}							
+	            ];	
+		 
+		 var overlays = [
+					 {
+						groupName : "Plano leonardo",
+						layers    : { 
+						
+						    
+							"Plano Leonardo 1502" 	 	: lyrlaser
+							//"Municipalidad de Arica" 	 	: muniarica,
+							
+						}	
+					}
+	             ];
+				
+         //definir las opciones para el styledlayercontrol
+				var options = {
+		                 container_width 	: "300px",
+		                 container_maxHeight : "350px", 
+		                 group_maxHeight     : "80px",
+		                 exclusive       	: false
+	            };
+				
+		//crear el styledlayerControl 
+				var control = L.Control.styledLayerControl(baseMaps,overlays, options);
+	            map.addControl(control);
+
+        //seleccion de capas que van a mostrarse por defecto
+		       
+         		control.unSelectGroup( "Plano leonardo" );
+				
+				L.control.scale().addTo(map);
+		
+		
+		
+ </script>  
+ 
+ 
+ </body>   
+ </html>
